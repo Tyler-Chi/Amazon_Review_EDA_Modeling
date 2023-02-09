@@ -6,4 +6,4 @@ Data_Processing/Intermediate_Datasets
 Data_Processing/reviewer_ids
 *.ipynb_checkpoints*
 Processed_Data/
-*.csv*
+*.csv
