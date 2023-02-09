@@ -1,0 +1,2 @@
+The raw datasets are added to the .gitignore
+Raw json.gz downloaded from: https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/

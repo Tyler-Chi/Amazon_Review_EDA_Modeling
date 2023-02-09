@@ -1,0 +1,9 @@
+Home_And_Kitchen
+Modeling/Saved_Models/
+Rainforest_API
+Amazon_Review_Data/*json*
+Data_Processing/Intermediate_Datasets
+Data_Processing/reviewer_ids
+*.ipynb_checkpoints*
+Processed_Data/
+*.csv*
