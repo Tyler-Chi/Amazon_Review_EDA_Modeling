@@ -9,7 +9,7 @@ Amazon products generally have uniqitous 4 and 5* reviews, and often times it is
 ## Data Pre-Processing (Map Reduce)
 The biggest initial hurdle of this project was just processing the data, given it's sheer size (~230 million rows). This was all run locally on my computer, so I had to make sure to write code that would run in a reasonable timeframe.
 
-[Initial Mapping](./Data_Processing/Process_Full_Dataset)
+[Initial Mapping](./Data_Processing/Review_Mapping.ipynb)
 ![InitialMap](./Readme_Images/initial_map.png)
 
 <!-- ![Screenshot](./Readme_Images/reviewer_proportions.png) -->
