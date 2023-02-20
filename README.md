@@ -31,8 +31,13 @@ I was very curious to see how Reviewer behavior changed, based on how many revie
 It seems like almost half of the reviewers gave only 1 review.
 ![ReviewerProportions](./Readme_Images/reviewer_proportions.png)
 
-This was perhaps the most interesting finding of the EDA. It seems like the average review steadily increases with the number of reviews given. It is likely that there are a lot of users who generally don't post reviews, but when they encounter a very bad product, they are willing to leave a bad review.
+This was perhaps the most interesting finding of the EDA. It seems like the average review steadily increases with the number of reviews given. It is likely that there are a lot of users who generally don't post reviews, but encountering a product that they really don't like can sway them into leaving a negative review. Reviewers that post more reviews tend to give higher ratings on average.
 ![AvgRatingVsNumReviews](./Readme_Images/avg_rating_by_num_reviews.png)
 
+## Active Reviewer EDA
+
+I'm specifically interested in where the 1* ratings are coming from, whether it is from a small proportion primarily giving low ratings, or a large proportion on average giving higher ratings -- but sometimes giving lower ratings. Because I'm looking at average ratings per reviewers, I want to focus on reviewers who gave between 5 and 15 reviews. These will be called "active reviewers". Looking at the average rating of a reviewer who has only given 1 or 2 reviews might not produce a meaningful average rating, and looking at reviewers who gave dozens of reviews might not be representation of the reviewer population.
+
+![1StarReviewSources](./Readme_Images/1_star_source.png)
 
 <!-- https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/ -->
