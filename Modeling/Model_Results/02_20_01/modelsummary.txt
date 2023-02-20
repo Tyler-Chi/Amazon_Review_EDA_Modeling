@@ -1,0 +1,64 @@
+Model: "model_1"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ attention_mask_layer (InputLay  [(None, 50)]        0           []                               
+ er)                                                                                              
+                                                                                                  
+ input_ids_layer (InputLayer)   [(None, 50)]         0           []                               
+                                                                                                  
+ token_type_ids_layer (InputLay  [(None, 50)]        0           []                               
+ er)                                                                                              
+                                                                                                  
+ tf_bert_model (TFBertModel)    TFBaseModelOutputWi  108310272   ['attention_mask_layer[0][0]',   
+                                thPoolingAndCrossAt               'input_ids_layer[0][0]',        
+                                tentions(last_hidde               'token_type_ids_layer[0][0]']   
+                                n_state=(None, 50,                                                
+                                768),                                                             
+                                 pooler_output=(Non                                               
+                                e, 768),                                                          
+                                 past_key_values=No                                               
+                                ne, hidden_states=N                                               
+                                one, attentions=Non                                               
+                                e, cross_attentions                                               
+                                =None)                                                            
+                                                                                                  
+ conv1d_3 (Conv1D)              (None, 49, 30)       46110       ['tf_bert_model[1][0]']          
+                                                                                                  
+ conv1d_4 (Conv1D)              (None, 48, 30)       69150       ['tf_bert_model[1][0]']          
+                                                                                                  
+ conv1d_5 (Conv1D)              (None, 47, 30)       92190       ['tf_bert_model[1][0]']          
+                                                                                                  
+ global_max_pooling1d_3 (Global  (None, 30)          0           ['conv1d_3[0][0]']               
+ MaxPooling1D)                                                                                    
+                                                                                                  
+ global_max_pooling1d_4 (Global  (None, 30)          0           ['conv1d_4[0][0]']               
+ MaxPooling1D)                                                                                    
+                                                                                                  
+ global_max_pooling1d_5 (Global  (None, 30)          0           ['conv1d_5[0][0]']               
+ MaxPooling1D)                                                                                    
+                                                                                                  
+ dense_3 (Dense)                (None, 300)          230700      ['tf_bert_model[1][1]']          
+                                                                                                  
+ filter_0_dropout_0.2 (Dropout)  (None, 30)          0           ['global_max_pooling1d_3[0][0]'] 
+                                                                                                  
+ filter_1_dropout_0.2 (Dropout)  (None, 30)          0           ['global_max_pooling1d_4[0][0]'] 
+                                                                                                  
+ filter_2_dropout_0.2 (Dropout)  (None, 30)          0           ['global_max_pooling1d_5[0][0]'] 
+                                                                                                  
+ concatenate_1 (Concatenate)    (None, 390)          0           ['dense_3[0][0]',                
+                                                                  'filter_0_dropout_0.2[0][0]',   
+                                                                  'filter_1_dropout_0.2[0][0]',   
+                                                                  'filter_2_dropout_0.2[0][0]']   
+                                                                                                  
+ dense_4 (Dense)                (None, 300)          117300      ['concatenate_1[0][0]']          
+                                                                                                  
+ dense_5 (Dense)                (None, 200)          60200       ['dense_4[0][0]']                
+                                                                                                  
+ prediction_layer (Dense)       (None, 1)            201         ['dense_5[0][0]']                
+                                                                                                  
+==================================================================================================
+Total params: 108,926,123
+Trainable params: 615,851
+Non-trainable params: 108,310,272
+__________________________________________________________________________________________________

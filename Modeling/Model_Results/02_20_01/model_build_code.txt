@@ -1,0 +1,53 @@
+def build_bert_cnn_model(bert_model):
+    bert_model.trainable = False
+    # 3 BERT input layers
+    input_ids = tf.keras.layers.Input(shape=(max_length,), dtype=tf.int64, name='input_ids_layer')
+    token_type_ids = tf.keras.layers.Input(shape=(max_length,), dtype=tf.int64, name='token_type_ids_layer')
+    attention_mask = tf.keras.layers.Input(shape=(max_length,), dtype=tf.int64, name='attention_mask_layer')
+
+    # assemble to pass into bert model
+    bert_inputs = {'input_ids': input_ids,
+                   'token_type_ids': token_type_ids,
+                   'attention_mask': attention_mask}
+
+    bert_out = bert_model(bert_inputs)
+    
+    sequence_output = bert_out[0]
+    cls_token = bert_out[1]
+    
+    cls_dense_layer = keras.layers.Dense(300, activation='relu')(cls_token)
+    
+    concat_layers = [cls_dense_layer] # initialize it with the pooled output, see if that improves model performance.
+    
+    # determine these kernel/filters based on max_length
+    kernel_sizes = [2,3,4]
+    num_filters = [30,30,30]
+    
+    filter_num = 0
+    for kernel_size, filters in zip(kernel_sizes, num_filters):
+        conv_layer = keras.layers.Conv1D(filters=filters, kernel_size=kernel_size, activation='relu')(sequence_output)
+        pooling_layer = keras.layers.GlobalMaxPooling1D()(conv_layer)
+        dropout_pooling_layer = keras.layers.Dropout(0.2, name=f'filter_{filter_num}_dropout_0.2')(pooling_layer)
+        filter_num += 1
+        concat_layers.append(dropout_pooling_layer)
+    
+    conv_output = tf.keras.layers.concatenate(concat_layers, axis=1)
+    
+    # 2 dense layers
+    net = keras.layers.Dense(300, activation='relu')(conv_output)
+    net = keras.layers.Dense(200, activation='relu')(net)
+                         
+    regression = keras.layers.Dense(1, activation='linear', name='prediction_layer')(net)
+    cnn_model = keras.Model(
+        inputs=[input_ids, token_type_ids, attention_mask],
+        outputs=regression
+    )
+    
+    cnn_model.compile(
+        # optimizer=keras.optimizers.Adam(learning_rate=0.0005), # half of the normal learning rate
+        optimizer='adam',
+        loss='mean_squared_error'
+    )
+                         
+    return cnn_model
+
