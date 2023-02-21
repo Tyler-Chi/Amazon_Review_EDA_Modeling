@@ -1,10 +1,10 @@
 # Amazon Reviewer Behavior Analysis and Prediction
 
 ## Overview:
-In this project, the objective is to analyze Amazon reviewer behavior, using a large dataset of Amazon reviews spanning from 1996 to 2018. The initial phases of this project revolved around map-reducing the Amazon reviews, in order to aggregate reviewer information. During the EDA stages, I mainly looked at how reviewer behavior changed, based on how active they were. In the later stages of this project, the main goal was to predict the average rating of a reviewer, given a 1-star review given by them.
+The objective of this project is to analyze Amazon reviewer behavior, using a large dataset of Amazon reviews spanning from 1996 to 2018. The initial phases of this project revolved around map-reducing the Amazon reviews, in order to aggregate reviewer information. During the EDA stages, I mainly looked at how reviewer behavior changed based on how active they were. In the later stages of this project the main goal was to predict the average rating of a reviewer, given a 1-star review given by them.
 
 ## Motivation:
-Amazon products generally have uniqitous 4 and 5* reviews, and often times it is hard to know how good a product really is. Personally, I tend to look at the 1* reviews, to get a better understanding of what issues other customers had with the product. One thing I worry about though is that some users may just give 1* reviews across the board. I believe that 1* reviews from reviewers who generally give high ratings would be more informative, not only to potential consumers, but also retailers seeking to improve their product.
+Amazon products generally have uniqitous 4 and 5* reviews, and often times it is hard to know how good a product really is. I tend to look at the 1* reviews, to get a better understanding of what issues other customers had with the product. One thing I worry about though is that some users may just give low ratings across the board. I believe that 1* reviews from reviewers who generally give high ratings would be more informative than 1* reviews that come from generally negative reviewers.
 
 ## Data Source
 Thanks to Jianmo Ni, from UCSD, for making this dataset public. The dataset is comprised of all Amazon reviews, given between 1996 and 2018. Individual reviews have: a reviewId, title, body, and rating given, as well as some other columns which I did not use in this project. The original dataset can be found [here](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/).
@@ -52,6 +52,12 @@ It looks like for the most part, active reviewers who are giving 1* ratings stil
 Because the vast majority of reviews given on Amazon are high ratings (4* and 5*), I am most interested in looking at where the 1* reviews are coming from - specifically the average rating of the giver. I would definitely look closer at a 1* review that came from someone who gives generally positive reviews, than someone who gives generally negative reviewers.
 
 I used a handful of NLP models to try predicting the reviewer average rating, treating this as a regression problem. In general, the models have fairly low R2 scores (peaking at ~0.045), meaning that there is a very weak signal. BERT-CNN models seemed to perform the best, and I am currently still trying to improve performance through hyperparameter tuning, and modifying the network architecture.
+
+Once I fine-tune a couple different models, I want to explore stacking them to see if I can get a performance boost. Stay tuned!
+
+#### [BERT-CNN Model](Modeling/Bert_CNN.ipynb)
+
+#### [TF-IDF Random Forest](Modeling/TF_IDF_Random_Forest.ipynb)
 
 
 ## Citations
